@@ -50,11 +50,8 @@
 }
 
 .checkbox-container input[type="checkbox"] {
-  padding: none;
-  border-radius: none;
   border: none;
   box-shadow: none;
-  color: #be61fc;
 }
 
 .input-with-icon {
@@ -97,32 +94,6 @@ input[type='password']::placeholder input[type='text']::placeholder {
   color: #719cff;
 }
 
-.remember-forgot {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 1rem;
-  background: linear-gradient(to top, #5f72bd 0%, #9b23ea 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.rem-label {
-  display: flex;
-  align-items: center;
-}
-
-.rem-checkbox {
-  margin: 0 10px;
-  display: flex;
-  align-items: center;
-}
-
-.forgot-pass {
-  margin-left: auto;
-}
-
 .auth-button-container {
   display: flex;
   justify-content: center;
@@ -132,7 +103,7 @@ input[type='submit'] {
   color: #fff;
   margin-bottom: 3.5rem;
   padding: 1rem;
-  background: linear-gradient(to right, #ff4d4d, #ff9999);
+  background: linear-gradient(to right, #ff4d4d, #f99);
 }
 
 .auth-message {
@@ -159,7 +130,7 @@ input[type='submit'] {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to right, #ff4d4d, #ff9999);
+  background: linear-gradient(to right, #ff4d4d, #f99);
   height: 100%;
   color: #fff;
   border-top-right-radius: 2.5rem;
