@@ -1,0 +1,170 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.auth-page {
+  display: grid;
+  place-items: center;
+  grid-template-columns: 1.4fr 1fr;
+  font-family: 'Roboto', sans-serif;
+  font-size: 2rem;
+  width: 80%;
+  height: 75%;
+  background-color: white;
+  border-radius: 2.5rem;
+  box-shadow: 0 5px 20px rgba(77, 91, 170, 0.5);
+}
+
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 80%;
+}
+
+.auth-header {
+  margin-bottom: 3rem;
+}
+
+.signin-desc {
+  color: #666;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  width: 70%;
+}
+
+.auth-form input {
+  padding: 1.2rem 0.5rem;
+  border-radius: 15px;
+  border: none;
+  box-shadow: 0 2px 4px rgba(95, 114, 189, 0.5);
+}
+
+.checkbox-container input[type="checkbox"] {
+  padding: none;
+  border-radius: none;
+  border: none;
+  box-shadow: none;
+  color: #be61fc;
+}
+
+.input-with-icon {
+  position: relative;
+  align-items: center;
+  display: inline-flex;
+}
+
+.input-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 10px;
+  color: #719cff;
+}
+
+.input-with-icon input::placeholder {
+  color: #719cff;
+}
+
+input[type='email'][name='email'] {
+  padding-left: 40px;
+  width: 100%;
+  color: #719cff;
+}
+
+input[type='password'][name='password'] {
+  padding-left: 40px;
+  width: 100%;
+}
+
+input[type='text'][name='username'] {
+  padding-left: 40px;
+  width: 100%;
+  color: #719cff;
+}
+
+input[type='email']::placeholder,
+input[type='password']::placeholder input[type='text']::placeholder {
+  color: #719cff;
+}
+
+.remember-forgot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1rem;
+  background: linear-gradient(to top, #5f72bd 0%, #9b23ea 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.rem-label {
+  display: flex;
+  align-items: center;
+}
+
+.rem-checkbox {
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+}
+
+.forgot-pass {
+  margin-left: auto;
+}
+
+.auth-button-container {
+  display: flex;
+  justify-content: center;
+}
+
+input[type='submit'] {
+  color: #fff;
+  margin-bottom: 3.5rem;
+  padding: 1rem;
+  background: linear-gradient(to right, #ff4d4d, #ff9999);
+}
+
+.auth-message {
+  color: #719cff;
+  font-size: 1.5rem;
+}
+
+.terms-conditions-label {
+  display: flex;
+  justify-content: center;
+}
+
+.checkbox-container {
+  font-size: 1.2rem;
+}
+
+.term {
+  margin-left: 10px;
+  color: #719cff;
+}
+
+.welcomeback-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #ff4d4d, #ff9999);
+  height: 100%;
+  color: #fff;
+  border-top-right-radius: 2.5rem;
+  border-bottom-right-radius: 2.5rem;
+  text-align: center;
+  padding: 5rem;
+  gap: 2rem;
+}
