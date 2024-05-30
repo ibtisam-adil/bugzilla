@@ -23,7 +23,7 @@ body {
     max-width: 270px;
   }
 
-  .auth-page .welcomeback-section {
+  .auth-page {
     padding: 4rem;
   }
 }
@@ -31,6 +31,10 @@ body {
 @media (max-width: 768px) {
   html {
     font-size: 56%;
+  }
+
+  .auth-page {
+    padding: 2rem;
   }
 
   .main .auth-page {
@@ -42,17 +46,13 @@ body {
     max-width: 270px;
   }
 
-  .auth-page .welcomeback-section {
-    padding: 2rem;
-  }
-
   .checkbox-container .term {
     margin-left: 4px;
   }
 }
 
 @media (max-width: 425px) {
-  .auth-page .welcomeback-section {
+  .auth-page {
     display: none;
   }
 
