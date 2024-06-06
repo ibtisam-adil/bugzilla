@@ -41,12 +41,12 @@ input[type='email'][name='email'] {
   color: #719cff;
 }
 
-input[type='password'][name='password'] {
+input[type='password'] {
   padding-left: 40px;
   width: 100%;
 }
 
-input[type='text'][name='username'] {
+input[type='text'][name='name'] {
   padding-left: 40px;
   width: 100%;
   color: #719cff;
