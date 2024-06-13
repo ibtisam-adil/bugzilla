@@ -2,14 +2,23 @@ import './App.css';
 import {
   BrowserRouter as Router, Routes, Route, Navigate,
 } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { selectAuth } from './redux/auth/AuthSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { currentUser, selectAuth } from './redux/auth/AuthSlice';
 import SignIn from './components/signPage/SignIn';
 import SignUp from './components/signPage/SignUp';
 import Test from './components/test/Test';
 
 const App = () => {
   const { isLogin } = useSelector(selectAuth);
+  const token = localStorage.getItem('token');
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!isLogin && token) {
+      dispatch(currentUser());
+    }
+  }, [dispatch, isLogin, token]);
 
   return (
     <div className="App">
