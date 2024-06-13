@@ -35,17 +35,17 @@ export const logout = createAsyncThunk('login/logoutUser', async () => {
   return data;
 });
 
-// export const currentUser = createAsyncThunk('login/currentUser', async () => {
-//   const token = localStorage.getItem('token');
+export const currentUser = createAsyncThunk('login/currentUser', async () => {
+  const token = localStorage.getItem('token');
 
-//   const response = await axios.get('http://127.0.0.1:3000/current_user', {
-//     headers: {
-//       Authorization: token,
-//     },
-//   });
-//   const { data } = response;
-//   return data;
-// });
+  const response = await axios.get('http://127.0.0.1:3000/current_user', {
+    headers: {
+      Authorization: token,
+    },
+  });
+  const { data } = response;
+  return data;
+});
 
 export const signup = createAsyncThunk('signup/signupUser', async (userCredentials) => {
   try {
@@ -125,20 +125,20 @@ const authSlice = createSlice({
       state.loading = false;
       state.error = action.error.message;
     });
-    // builder.addCase(currentUser.pending, (state) => {
-    //   state.loading = true;
-    // });
-    // builder.addCase(currentUser.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   if (
-    //     action.payload
-    //     && action.payload.user !== undefined
-    //     && action.payload.user !== null
-    //   ) {
-    //     state.user = action.payload.user;
-    //     state.isLogin = true;
-    //   }
-    // });
+    builder.addCase(currentUser.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(currentUser.fulfilled, (state, action) => {
+      state.loading = false;
+      if (
+        action.payload
+        && action.payload.user !== undefined
+        && action.payload.user !== null
+      ) {
+        state.user = action.payload.user;
+        state.isLogin = true;
+      }
+    });
     builder.addCase(signup.fulfilled, (state, action) => {
       state.loading = false;
       if (

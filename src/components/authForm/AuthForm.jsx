@@ -34,7 +34,7 @@ const AuthForm = ({
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="grid place-items-center grid-cols-1 md:grid-cols-custom font-roboto text-3xl w-4/5 h-3/4 bg-white rounded-3xl shadow-[0_5px_20px_rgba(77,91,170,0.5)]">
+      <div className="grid place-items-center grid-cols-1 md:grid-cols-custom font-roboto text-3xl w-3/4 h-3/4 bg-white rounded-3xl shadow-[0_5px_20px_rgba(77,91,170,0.5)]">
         <div className="flex flex-col justify-center items-center text-center w-4/5 mx-auto">
           <div className="mb-12">
             <h2>{title}</h2>
