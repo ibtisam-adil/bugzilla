@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +12,7 @@ const initialValues = {
 };
 
 const SignIn = () => {
+  const [formType, setFormType] = useState('signin');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLogin = useSelector((state) => state.auth.isLogin);
@@ -54,6 +55,13 @@ const SignIn = () => {
     },
   ];
 
+  const handleFormSwitch = (newFormType) => {
+    setFormType(newFormType);
+    if (newFormType === 'signup') {
+      navigate('/signup');
+    }
+  };
+
   return (
     <AuthForm
       title="Hello!"
@@ -62,9 +70,10 @@ const SignIn = () => {
       inputFields={signInInputFields}
       welcomeMsg="Welcome Back!"
       welcomeDetail="Welcome back! We're delighted to see you return. Your presence means a lot to us!"
-      formType="signin"
+      formType={formType}
       handleSubmit={handleSubmit}
       setFieldValue={setFieldValue}
+      handleFormSwitch={handleFormSwitch}
     />
   );
 };

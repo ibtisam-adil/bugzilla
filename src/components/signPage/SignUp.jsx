@@ -75,6 +75,10 @@ const SignUp = () => {
     },
   ];
 
+  const handleFormSwitch = () => {
+    navigate('/signin');
+  };
+
   return (
     <AuthForm
       title="Hello, friend!"
@@ -88,6 +92,7 @@ const SignUp = () => {
       userType={values.user_type}
       handleSubmit={handleSubmit}
       setFieldValue={setFieldValue}
+      handleFormSwitch={handleFormSwitch}
     />
   );
 };

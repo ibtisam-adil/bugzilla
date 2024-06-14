@@ -16,6 +16,7 @@ const AuthForm = ({
   handleSubmit,
   setFieldValue,
   userType,
+  handleFormSwitch,
 }) => {
   const dispatch = useDispatch();
 
@@ -32,12 +33,16 @@ const AuthForm = ({
     }
   };
 
+  const handleMessageClick = () => {
+    handleFormSwitch(formType === 'signin' ? 'signup' : 'signin');
+  };
+
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="grid place-items-center grid-cols-1 md:grid-cols-custom font-roboto text-3xl w-3/4 h-3/4 bg-white rounded-3xl shadow-[0_5px_20px_rgba(77,91,170,0.5)]">
         <div className="flex flex-col justify-center items-center text-center w-4/5 mx-auto">
           <div className="mb-12">
-            <h2>{title}</h2>
+            <h2 className="text-4xl font-semibold">{title}</h2>
             {title === 'Hello!' && (
               <p className="text-gray-600">Sign in to your account</p>
             )}
@@ -59,7 +64,7 @@ const AuthForm = ({
             ))}
             {showCheckbox && (
               <div className="checkbox-container">
-                <label htmlFor="qa" className="terms-conditions-label">
+                <label htmlFor="qa" className="terms-conditions-label flex justify-center gap-4">
                   <input
                     type="checkbox"
                     id="qa"
@@ -78,7 +83,13 @@ const AuthForm = ({
               <input type="submit" value={buttonText} />
             </div>
           </form>
-          <p className="text-blue-500 text-2xl">{message}</p>
+          <button
+            type="button"
+            className="text-blue-500 text-2xl cursor-pointer"
+            onClick={handleMessageClick}
+          >
+            {message}
+          </button>
         </div>
         <div className="bg-gradient-to-r from-custom-red to-custom-pink flex flex-col justify-center items-center h-full text-white rounded-tr-2xl rounded-br-2xl text-center gap-8 p-20 lg:p-16 md:p-8 max-md:hidden">
           <h3>{welcomeMsg}</h3>
@@ -109,6 +120,7 @@ AuthForm.propTypes = {
   handleSubmit: PropTypes.func,
   setFieldValue: PropTypes.func.isRequired,
   userType: PropTypes.oneOf(['qa', 'developer']),
+  handleFormSwitch: PropTypes.func.isRequired,
 };
 
 AuthForm.defaultProps = {
