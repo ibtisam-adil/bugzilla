@@ -2,6 +2,8 @@ import './App.css';
 import {
   BrowserRouter as Router, Routes, Route, Navigate,
 } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { currentUser, selectAuth } from './redux/auth/AuthSlice';
@@ -30,6 +32,7 @@ const App = () => {
           <Route path="*" element={<Navigate to={isLogin ? '/' : '/signin'} />} />
         </Routes>
       </Router>
+      <ToastContainer />
     </div>
   );
 };

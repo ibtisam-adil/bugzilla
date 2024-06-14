@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export const login = createAsyncThunk('login/loginUser', async (userCredentials) => {
   try {
@@ -16,23 +17,31 @@ export const login = createAsyncThunk('login/loginUser', async (userCredentials)
     );
     localStorage.setItem('token', response.headers.authorization);
     const { data } = response;
+    toast.success(data.message);
     return data;
   } catch (error) {
-    return null;
+    toast.error(error.response.data);
+    throw (error.response.data.message);
   }
 });
 
 export const logout = createAsyncThunk('login/logoutUser', async () => {
   const token = localStorage.getItem('token');
-  const response = await axios.delete('http://127.0.0.1:3000/logout', {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: token,
-    },
-  });
-  const { data } = response;
-  localStorage.removeItem('token');
-  return data;
+  try {
+    const response = await axios.delete('http://127.0.0.1:3000/logout', {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+    });
+    const { data } = response;
+    localStorage.removeItem('token');
+    toast.success(data.message);
+    return data;
+  } catch (error) {
+    toast.error(error.response.data);
+    throw (error.response.data.message);
+  }
 });
 
 export const currentUser = createAsyncThunk('login/currentUser', async () => {
@@ -54,8 +63,10 @@ export const signup = createAsyncThunk('signup/signupUser', async (userCredentia
     });
     const { data } = response;
     localStorage.setItem('token', response.headers.authorization);
+    toast.success(response.data.message);
     return data;
   } catch (error) {
+    toast.error(error.response.data.errors[0]);
     return null;
   }
 });
