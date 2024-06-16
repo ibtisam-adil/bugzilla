@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './authForm.css';
 import { useDispatch } from 'react-redux';
-import manager from '../../../public/Assets/manager.jpeg';
-import dev from '../../../public/Assets/dev.jpeg';
-import qa from '../../../public/Assets/qa.jpeg';
+// import manager from '../../../public/Assets/manager.jpeg';
+// import dev from '../../../public/Assets/dev.jpeg';
+// import qa from '../../../public/Assets/qa.jpeg';
 import { login } from '../../redux/auth/AuthSlice';
+import DemoUsers from '../Demo/DemoUsers';
 
 const AuthForm = ({
   title = '',
@@ -22,6 +23,7 @@ const AuthForm = ({
   handleFormSwitch,
 }) => {
   const dispatch = useDispatch();
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -40,14 +42,8 @@ const AuthForm = ({
     handleFormSwitch(formType === 'signin' ? 'signup' : 'signin');
   };
 
-  const handleManagerClick = (email, password) => {
-    dispatch(login({ email, password }));
-  };
-
-  const handleKeyPress = (e, email, password) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      handleManagerClick(email, password);
-    }
+  const handleDemoUsersClick = () => {
+    setIsOpen(true);
   };
 
   return (
@@ -97,51 +93,7 @@ const AuthForm = ({
             </div>
             {formType === 'signin' && (
               <div>
-                <p className="mb-5">Demo Users</p>
-                <div className="flex justify-center gap-6 mb-7">
-                  <div
-                    role="button"
-                    tabIndex="0"
-                    onClick={() => handleManagerClick('manager@gmail.com', '123456')}
-                    onKeyPress={(e) => handleKeyPress(e, 'manager@gmail.com', '123456')}
-                    className="w-1/5"
-                  >
-                    <img
-                      src={manager}
-                      alt="admin"
-                      className="rounded-full"
-                    />
-                    <p className="text-xl">Manager</p>
-                  </div>
-                  <div
-                    role="button"
-                    tabIndex="0"
-                    onClick={() => handleManagerClick('developer@gmail.com', '123456')}
-                    onKeyPress={(e) => handleKeyPress(e, 'developer@gmail.com', '123456')}
-                    className="w-1/5"
-                  >
-                    <img
-                      src={dev}
-                      alt="dev"
-                      className="rounded-full"
-                    />
-                    <p className="text-xl">Developer</p>
-                  </div>
-                  <div
-                    role="button"
-                    tabIndex="0"
-                    onClick={() => handleManagerClick('qa@gmail.com', '123456')}
-                    onKeyPress={(e) => handleKeyPress(e, 'qa@gmail.com', '123456')}
-                    className="w-1/5"
-                  >
-                    <img
-                      src={qa}
-                      alt="qa"
-                      className="rounded-full"
-                    />
-                    <p className="text-xl">QA</p>
-                  </div>
-                </div>
+                <button type="button" className="mb-5" onClick={handleDemoUsersClick}>Demo Users</button>
               </div>
             )}
           </form>
@@ -158,6 +110,7 @@ const AuthForm = ({
           <p>{welcomeDetail}</p>
         </div>
       </div>
+      <DemoUsers isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
 };
