@@ -1,6 +1,7 @@
 import './App.css';
 import {
-  BrowserRouter as Router, Routes, Route, Navigate,
+  BrowserRouter as Router, Routes, Route,
+  Navigate,
 } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/signin" element={isLogin ? <Navigate to="/" /> : <SignIn />} />
           <Route path="/signup" element={isLogin ? <Navigate to="/" /> : <SignUp />} />
           <Route path="*" element={<Navigate to={isLogin ? '/' : '/signin'} />} />
+          {/* <Route path="/" element={<Btn />} /> */}
         </Routes>
       </Router>
       <ToastContainer />
