@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './authForm.css';
 import { useDispatch } from 'react-redux';
-// import manager from '../../../public/Assets/manager.jpeg';
-// import dev from '../../../public/Assets/dev.jpeg';
-// import qa from '../../../public/Assets/qa.jpeg';
 import { login } from '../../redux/auth/AuthSlice';
 import DemoUsers from '../Demo/DemoUsers';
 

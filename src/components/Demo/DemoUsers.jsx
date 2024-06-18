@@ -38,17 +38,17 @@ const DemoUsers = ({ isOpen, setIsOpen }) => {
                   aria-label="Close"
                 />
 
-                <div className="flex justify-center items-center font-bold my-8 gap-6">
+                <div className="flex justify-center items-center font-bold mb-8 mt-4 gap-6">
                   <i className="bx bxs-bug text-4xl" />
                   <div className="text-2xl">Demo-User Login</div>
                 </div>
-                <div className="flex justify-center gap-10 mb-12">
+                <div className="flex justify-center gap-14 mb-12">
                   <div
                     onClick={() => dispatch(login({ email: 'manager@gmail.com', password: '123456' }))}
                     onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ' ? dispatch(login({ email: 'john@gmail.com', password: '123456' })) : null)}
                     role="button"
                     tabIndex="0"
-                    className="flex flex-col items-center w-[15%] hover:scale-90 transition-transform duration-300"
+                    className="flex flex-col items-center w-[15%] hover:scale-90 transition-transform duration-300 gap-4"
                   >
                     <img
                       src={manager}
@@ -62,7 +62,7 @@ const DemoUsers = ({ isOpen, setIsOpen }) => {
                     onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ' ? dispatch(login({ email: 'developer@gmail.com', password: '123456' })) : null)}
                     role="button"
                     tabIndex="0"
-                    className="flex flex-col items-center w-[15%] hover:scale-90 transition-transform duration-300"
+                    className="flex flex-col items-center w-[15%] hover:scale-90 transition-transform duration-300 gap-4"
                   >
                     <img src={dev} alt="dev" className="rounded-full" />
                     <p className="text-xl">Developer</p>
@@ -72,7 +72,7 @@ const DemoUsers = ({ isOpen, setIsOpen }) => {
                     onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ' ? dispatch(login({ email: 'qa@gmail.com', password: '123456' })) : null)}
                     role="button"
                     tabIndex="0"
-                    className="flex flex-col items-center w-[15%] hover:scale-90 transition-transform duration-300"
+                    className="flex flex-col items-center w-[15%] hover:scale-90 transition-transform duration-300 gap-4"
                   >
                     <img src={qa} alt="Qa" className="rounded-full" />
                     <p className="text-xl">QA</p>
