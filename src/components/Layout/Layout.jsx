@@ -1,6 +1,6 @@
 import React from 'react';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
+// import Skeleton from 'react-loading-skeleton';
+// import 'react-loading-skeleton/dist/skeleton.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,7 +10,7 @@ import dashboard from '../../../public/Assets/dashboard.png';
 import tickets from '../../../public/Assets/tickets.png';
 import { logout } from '../../redux/auth/AuthSlice';
 
-const Sidebar = () => {
+const Layout = () => {
   const loading = useSelector((state) => state.auth.loading);
   const isLogin = useSelector((state) => state.auth.isLogin);
   const dispatch = useDispatch();
@@ -19,14 +19,14 @@ const Sidebar = () => {
       <div className="grid grid-cols-[20rem,8fr]">
         <aside className="h-screen py-1.5 px-2.5 bg-white border-x-2">
           <div className="flex justify-between items-center py-4 px-8">
-            <Skeleton width={150} height={40} />
+            {/* <Skeleton width={150} height={40} /> */}
           </div>
           <nav>
-            <Skeleton count={3} height={50} />
+            {/* <Skeleton count={3} height={50} /> */}
           </nav>
         </aside>
         <main>
-          <Skeleton className="mt-5" count={9} height={70} />
+          {/* <Skeleton className="mt-5" count={9} height={70} /> */}
         </main>
       </div>
     );
@@ -41,7 +41,7 @@ const Sidebar = () => {
           <>
             <div className="hover:bg-blue-500 hover:text-white rounded-xl flex items-center gap-6">
               <img width={20} height={20} alt="dashboard" src={dashboard} className="w-[20px]" />
-              <Link href="/" className="text-[rgb(58,54,54)] hover:text-white">
+              <Link to="/test" className="text-[rgb(58,54,54)] hover:text-white">
                 Dashboard
               </Link>
             </div>
@@ -74,4 +74,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default Layout;
