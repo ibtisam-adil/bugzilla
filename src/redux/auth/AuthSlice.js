@@ -1,31 +1,27 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 
-export const login = createAsyncThunk('login/loginUser', async (userCredentials) => {
+export const login = createAsyncThunk('login/loginUser', async (userCredentials, { rejectWithValue }) => {
   try {
-    const response = await axios.post(
-      'http://127.0.0.1:3000/login',
-      {
-        user: userCredentials,
+    const response = await axios.post('http://127.0.0.1:3000/login', {
+      user: userCredentials,
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
       },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      },
-    );
+    });
     localStorage.setItem('token', response.headers.authorization);
     const { data } = response;
-    toast.success(data.message);
+    // toast.success(data.message);
     return data;
   } catch (error) {
-    toast.error(error.response.data);
-    throw (error.response.data.message);
+    // toast.error(error.response.data.message || 'Login failed');
+    return rejectWithValue(error.response.data.message);
   }
 });
 
-export const logout = createAsyncThunk('login/logoutUser', async () => {
+export const logout = createAsyncThunk('login/logoutUser', async (_, { rejectWithValue }) => {
   const token = localStorage.getItem('token');
   try {
     const response = await axios.delete('http://127.0.0.1:3000/logout', {
@@ -36,24 +32,27 @@ export const logout = createAsyncThunk('login/logoutUser', async () => {
     });
     const { data } = response;
     localStorage.removeItem('token');
-    toast.success(data.message);
+    // toast.success(data.message);
     return data;
   } catch (error) {
-    toast.error(error.response.data);
-    throw (error.response.data.message);
+    // toast.error(error.response.data.message || 'Logout failed');
+    return rejectWithValue(error.response.data.message);
   }
 });
 
-export const currentUser = createAsyncThunk('login/currentUser', async () => {
+export const currentUser = createAsyncThunk('login/currentUser', async (_, { rejectWithValue }) => {
   const token = localStorage.getItem('token');
-
-  const response = await axios.get('http://127.0.0.1:3000/current_user', {
-    headers: {
-      Authorization: token,
-    },
-  });
-  const { data } = response;
-  return data;
+  try {
+    const response = await axios.get('http://127.0.0.1:3000/current_user', {
+      headers: {
+        Authorization: token,
+      },
+    });
+    const { data } = response;
+    return data;
+  } catch (error) {
+    return rejectWithValue(error.response.data.message);
+  }
 });
 
 export const signup = createAsyncThunk('signup/signupUser', async (userCredentials) => {
@@ -63,10 +62,10 @@ export const signup = createAsyncThunk('signup/signupUser', async (userCredentia
     });
     const { data } = response;
     localStorage.setItem('token', response.headers.authorization);
-    toast.success(response.data.message);
+    // toast.success(response.data.message);
     return data;
   } catch (error) {
-    toast.error(error.response.data.errors[0]);
+    // toast.error(error.response.data.errors[0]);
     return null;
   }
 });
@@ -182,3 +181,8 @@ const authSlice = createSlice({
 
 export const selectAuth = (state) => state.auth;
 export default authSlice.reducer;
+
+// manager Token: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIwOT
+// BiMTZhZC1hMzEyLTQ3OWEtYTI2Ni01MTMyNGQ5NjA2NzQiLCJzd
+// WIiOiIyMyIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTcxOTI4
+// ODMyMSwiZXhwIjoxNzE5NDYxMTIxfQ.UsyflqZ9fFJNyc-E7P8iLWOMtGwxUYMgUvA0oGNNk_s

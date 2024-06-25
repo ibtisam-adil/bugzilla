@@ -44,8 +44,8 @@ const DemoUsers = ({ isOpen, setIsOpen }) => {
                 </div>
                 <div className="flex justify-center gap-14 mb-12">
                   <div
-                    onClick={() => dispatch(login({ email: 'manager@gmail.com', password: '123456' }))}
-                    onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ' ? dispatch(login({ email: 'john@gmail.com', password: '123456' })) : null)}
+                    onClick={() => dispatch(login({ email: 'manager2@gmail.com', password: '123456' }))}
+                    onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ' ? dispatch(login({ email: 'manager2@gmail.com', password: '123456' })) : null)}
                     role="button"
                     tabIndex="0"
                     className="flex flex-col items-center w-[15%] hover:scale-90 transition-transform duration-300 gap-4"
