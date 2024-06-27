@@ -1,17 +1,17 @@
-/* eslint-disable camelcase */
 import { useEffect, useState } from 'react';
 // import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { useDispatch, useSelector } from 'react-redux';
 // import { Link } from 'react-router-dom';
 import { fetchProjects } from '../../redux/projects/ProjectSlice';
+import ProjectForm from './ProjectForm';
 
 const Project = () => {
   const dispatch = useDispatch();
 
   const { projects, error, loading } = useSelector((state) => state.projects);
-  const { user_type } = useSelector((state) => state.auth.user) || {};
-  const { isLogin } = useSelector((state) => state.auth) || {};
+  const userType = useSelector((state) => state.auth.user.user_type);
+  const isLogin = useSelector((state) => state.auth.isLogin);
 
   const [isOpen, setIsOpen] = useState(false);
   const [filteredProjects, setFilteredProjects] = useState(projects);
@@ -45,15 +45,15 @@ const Project = () => {
   return (
     <>
       <section className="projects-section">
-        <div className="projects border border-blue-500">
-          <div className="project-page">
+        <div className="projects border border-blue-500 px-10 text-2xl">
+          <div className="project-page flex justify-between py-10 text-3xl">
             <h3> Projects </h3>
-            {user_type && user_type === 'manager' && (
+            {userType && userType === 'manager' && (
               <button
                 type="button"
                 onClick={() => setIsOpen(true)}
                 className="btn new-project transition-transform duration-200 hover:scale-110"
-                to="/projects/new"
+                // to="/projects/new"
               >
                 Create Project
               </button>
@@ -67,7 +67,7 @@ const Project = () => {
                 <col style={{ width: '18%' }} />
                 <col style={{ width: '18%' }} />
               </colgroup>
-              <thead>
+              <thead className="text-2xl">
                 <tr>
                   <th>Project</th>
                   <th>Description</th>
@@ -102,13 +102,19 @@ const Project = () => {
                 ))}
                 {!error && !loading && filteredProjects.length === 0 && (
                   <tr>
-                    <td colSpan="4">There are no projects.</td>
+                    <td className="pl-[5px]" colSpan="4">There are no projects.</td>
                   </tr>
                 )}
               </tbody>
             </table>
           </div>
         </div>
+        <ProjectForm
+          isOpen={isOpen}
+          setIsOpen={() => setIsOpen(false)}
+          title="Create New Project"
+          // project={}
+        />
       </section>
     </>
   );

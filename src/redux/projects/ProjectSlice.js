@@ -24,6 +24,30 @@ export const fetchProjects = createAsyncThunk(
   },
 );
 
+export const createProjects = createAsyncThunk(
+  'projects/createProjects',
+  async (project) => {
+    const token = localStorage.getItem('token');
+    try {
+      const response = await axios.post('http://127.0.0.1:3000/projects',
+        project,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: token,
+          },
+        });
+      return response.data;
+    } catch (error) {
+      if (error.response.data.error) {
+        return error.response.data;
+      }
+      toast.error(error.response.data);
+      return null;
+    }
+  },
+);
+
 const initialState = {
   projects: [],
   loading: false,
@@ -49,6 +73,17 @@ const projectSlice = createSlice({
       }
     });
     builder.addCase(fetchProjects.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    });
+    builder.addCase(createProjects.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(createProjects.fulfilled, (state, action) => {
+      state.loading = false;
+      state.projects.push(action.payload);
+    });
+    builder.addCase(createProjects.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
     });
