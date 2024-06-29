@@ -11,7 +11,8 @@ import { currentUser, selectAuth } from './redux/auth/AuthSlice';
 import SignIn from './components/signPage/SignIn';
 import SignUp from './components/signPage/SignUp';
 import Layout from './components/Layout/Layout';
-import Test from './components/Projects/Projects';
+import Projects from './components/Projects/Projects';
+import ProjectDetail from './components/Projects/ProjectDetail';
 
 const App = () => {
   const { isLogin } = useSelector(selectAuth);
@@ -29,7 +30,8 @@ const App = () => {
       <Router>
         <Routes>
           <Route path="/*" element={isLogin ? <Layout /> : <Navigate to="/signin" />}>
-            <Route index element={<Test />} />
+            <Route index element={<Projects />} />
+            <Route path="projects/:id" element={<ProjectDetail />} />
           </Route>
           <Route path="/signin" element={isLogin ? <Navigate to="/" /> : <SignIn />} />
           <Route path="/signup" element={isLogin ? <Navigate to="/" /> : <SignUp />} />

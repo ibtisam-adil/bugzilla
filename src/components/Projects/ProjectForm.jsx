@@ -3,9 +3,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
-import { createProjects } from '../../redux/projects/ProjectSlice';
+import { createProjects, fetchProjects, updateProject } from '../../redux/projects/ProjectSlice';
 
-const ProjectForm = ({ isOpen, setIsOpen, project }) => {
+const ProjectForm = ({
+  isOpen, setIsOpen, project, formType, title,
+}) => {
   const dispatch = useDispatch();
 
   const initialValues = {
@@ -18,8 +20,13 @@ const ProjectForm = ({ isOpen, setIsOpen, project }) => {
     values, handleBlur, handleChange, handleSubmit,
   } = useFormik({
     initialValues,
-    onSubmit: (values, action) => {
-      dispatch(createProjects(values));
+    onSubmit: async (values, action) => {
+      if (formType === 'edit') {
+        dispatch(updateProject({ project: values, id: project.id }));
+      } else {
+        dispatch(createProjects(values));
+      }
+      dispatch(fetchProjects());
       setIsOpen(false);
       action.resetForm();
     },
@@ -42,7 +49,7 @@ const ProjectForm = ({ isOpen, setIsOpen, project }) => {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                className="max-w-[320px] w-[25%] h-2/5 bg-white p-4 rounded-xl"
+                className="max-w-[320px] w-[25%] bg-white p-4 rounded-xl"
               >
                 <button
                   type="button"
@@ -54,7 +61,7 @@ const ProjectForm = ({ isOpen, setIsOpen, project }) => {
                 </button>
 
                 <div className="flex justify-center items-center font-bold mb-8 mt-4 gap-6">
-                  <div className="text-2xl">Create New Project</div>
+                  <div className="text-2xl">{title}</div>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -89,7 +96,7 @@ const ProjectForm = ({ isOpen, setIsOpen, project }) => {
                       type="submit"
                       className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                     >
-                      Create Project
+                      {title}
                     </button>
                   </div>
                 </form>
@@ -106,13 +113,17 @@ ProjectForm.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   setIsOpen: PropTypes.func.isRequired,
   project: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     name: PropTypes.string,
     description: PropTypes.string,
   }),
+  formType: PropTypes.string,
+  title: PropTypes.string.isRequired,
 };
 
 ProjectForm.defaultProps = {
   project: {},
+  formType: 'create',
 };
 
 export default ProjectForm;

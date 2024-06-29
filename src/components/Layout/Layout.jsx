@@ -41,7 +41,7 @@ const Layout = () => {
           <>
             <div className="hover:bg-blue-500 hover:text-white rounded-xl flex items-center gap-6">
               <img width={20} height={20} alt="dashboard" src={dashboard} className="w-[20px]" />
-              <Link to="/test" className="text-[rgb(58,54,54)] hover:text-white">
+              <Link to="/" className="text-[rgb(58,54,54)] hover:text-white">
                 Dashboard
               </Link>
             </div>
