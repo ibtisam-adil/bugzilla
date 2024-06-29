@@ -8,12 +8,6 @@ import {
   fetchProjectById,
 } from '../../redux/projects/ProjectSlice';
 import ProjectForm from './ProjectForm';
-// import ProjectCollaborators from "./ProjectCollaborators";
-// import ProjectTickets from "./ProjectTickets";
-// import TicketForm from "../../tickets/TicketForm";
-// import { fetchProjectTickets } from "../../../features/project_tickets/projectTicketThunks";
-// import { usePathname } from "next/navigation";
-// import { useRouter } from "next/navigation";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -34,18 +28,8 @@ const ProjectDetail = () => {
 
   const { id: userId, user_type: userType } = useSelector((state) => state.auth.user) || {};
 
-  // Extracting projects from state.Project
   const { projects } = useSelector((state) => state.projects);
-
-  // Finding the project by id
   const project = projects && projects.find((project) => project.id === id);
-
-  // Debug logs
-  console.log('user_id:', userId);
-  console.log('user_type:', userType);
-  console.log('id:', id);
-  console.log('projects:', projects);
-  console.log('project:', project);
 
   const isLogin = useSelector((state) => state.auth.isLogin);
 
