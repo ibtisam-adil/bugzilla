@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 // import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { useDispatch, useSelector } from 'react-redux';
-// import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { fetchProjects } from '../../redux/projects/ProjectSlice';
 import ProjectForm from './ProjectForm';
 
@@ -53,7 +53,7 @@ const Project = () => {
                 type="button"
                 onClick={() => setIsOpen(true)}
                 className="btn new-project transition-transform duration-200 hover:scale-110"
-                // to="/projects/new"
+                to="/projects/new"
               >
                 Create Project
               </button>
@@ -90,13 +90,13 @@ const Project = () => {
                     <td className="project-description">{project.description}</td>
                     <td>John</td>
                     <td>
-                      {/* <Link
+                      <NavLink
                         className="btn"
-                        href={`/projects/${project.id}`}
+                        to={`/projects/${project.id}`}
                         state={{ id: project.id }}
                       >
                         Details
-                      </Link> */}
+                      </NavLink>
                     </td>
                   </tr>
                 ))}
@@ -113,7 +113,8 @@ const Project = () => {
           isOpen={isOpen}
           setIsOpen={() => setIsOpen(false)}
           title="Create New Project"
-          // project={}
+          setFilteredProjects={setFilteredProjects}
+          projects={projects}
         />
       </section>
     </>

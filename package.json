@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@headlessui/react": "^2.0.4",
+    "@heroicons/react": "^2.1.4",
     "@popperjs/core": "^2.11.8",
     "@reduxjs/toolkit": "^2.2.5",
     "@testing-library/jest-dom": "^5.17.0",
