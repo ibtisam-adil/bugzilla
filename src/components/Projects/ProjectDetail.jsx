@@ -8,6 +8,8 @@ import {
   fetchProjectById,
 } from '../../redux/projects/ProjectSlice';
 import ProjectForm from './ProjectForm';
+import ProjectCollaborators from './ProjectCollaborators';
+import { fetchprojectTickets } from '../../redux/projectTickets/ProjectTicketSlice';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -50,16 +52,16 @@ const ProjectDetail = () => {
   // };
 
   useEffect(() => {
-    if (!project && userId && isLogin) {
-      dispatch(fetchProjectById(userId));
+    if (!project && id && isLogin) {
+      dispatch(fetchProjectById(id));
     }
-  }, [dispatch, userId, project, isLogin]);
+  }, [dispatch, id, project, isLogin]);
 
-  // useEffect(() => {
-  //   if (userId && isLogin) {
-  //     dispatch(fetchProjectTickets(userId));
-  //   }
-  // }, [dispatch, id, isLogin]);
+  useEffect(() => {
+    if (id && isLogin) {
+      dispatch(fetchprojectTickets(id));
+    }
+  }, [dispatch, id, isLogin]);
 
   return (
     <div>
@@ -140,12 +142,11 @@ const ProjectDetail = () => {
               </Menu>
             </div>
           </div>
-
           <div className="grid sm:grid-cols-2">
-            {/* <ProjectCollaborators
-              project_id={project.id}
-              user_type={user_type}
-            /> */}
+            <ProjectCollaborators
+              projectId={project.id}
+              userType={userType}
+            />
             {/* <ProjectTickets project_id={project.id} /> */}
           </div>
 

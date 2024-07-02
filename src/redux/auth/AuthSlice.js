@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-// import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 export const login = createAsyncThunk('login/loginUser', async (userCredentials, { rejectWithValue }) => {
   try {
@@ -13,10 +13,10 @@ export const login = createAsyncThunk('login/loginUser', async (userCredentials,
     });
     localStorage.setItem('token', response.headers.authorization);
     const { data } = response;
-    // toast.success(data.message);
+    toast.success(data.message);
     return data;
   } catch (error) {
-    // toast.error(error.response.data.message || 'Login failed');
+    toast.error(error.response.data.message || 'Login failed');
     return rejectWithValue(error.response.data.message);
   }
 });
@@ -32,10 +32,10 @@ export const logout = createAsyncThunk('login/logoutUser', async (_, { rejectWit
     });
     const { data } = response;
     localStorage.removeItem('token');
-    // toast.success(data.message);
+    toast.success(data.message);
     return data;
   } catch (error) {
-    // toast.error(error.response.data.message || 'Logout failed');
+    toast.error(error.response.data.message || 'Logout failed');
     return rejectWithValue(error.response.data.message);
   }
 });
@@ -62,10 +62,10 @@ export const signup = createAsyncThunk('signup/signupUser', async (userCredentia
     });
     const { data } = response;
     localStorage.setItem('token', response.headers.authorization);
-    // toast.success(response.data.message);
+    toast.success(response.data.message);
     return data;
   } catch (error) {
-    // toast.error(error.response.data.errors[0]);
+    toast.error(error.response.data.errors[0]);
     return null;
   }
 });
@@ -74,7 +74,7 @@ export const fetchDevelopers = createAsyncThunk(
   'developers/fetchDevelopers',
   async () => {
     const token = localStorage.getItem('token');
-    const response = await axios.get('http://127.0.0.1:3000/developers', {
+    const response = await axios.get('http://127.0.0.1:3000/users/developers', {
       headers: {
         'Content-Type': 'application/json',
         Authorization: token,

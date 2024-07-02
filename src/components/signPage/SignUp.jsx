@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import AuthForm from '../authForm/AuthForm';
 import { signUpSchema } from '../../schemas';
 import { signup } from '../../redux/auth/AuthSlice';
