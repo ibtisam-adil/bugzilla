@@ -10,6 +10,8 @@ import {
 import ProjectForm from './ProjectForm';
 import ProjectCollaborators from './ProjectCollaborators';
 import { fetchprojectTickets } from '../../redux/projectTickets/ProjectTicketSlice';
+import ProjectTickets from './ProjectTickets';
+import TicketForm from '../Tickets/TicketForm';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -21,7 +23,7 @@ const ProjectDetail = () => {
   const navigate = useNavigate();
 
   const [isOpen, setIsOpen] = useState(false);
-  // const [isOpenTicket, setIsOpenTicket] = useState(false);
+  const [isOpenTicket, setIsOpenTicket] = useState(false);
   const [formType, setFormType] = useState(null);
 
   const { id } = location.state || {
@@ -46,10 +48,10 @@ const ProjectDetail = () => {
     setIsOpen(true);
   };
 
-  // const handleCreateTicket = () => {
-  //   setFormType("ticket");
-  //   setIsOpenTicket(true);
-  // };
+  const handleCreateTicket = () => {
+    setFormType('ticket');
+    setIsOpenTicket(true);
+  };
 
   useEffect(() => {
     if (!project && id && isLogin) {
@@ -121,7 +123,7 @@ const ProjectDetail = () => {
                         </Menu.Item>
                       </>
                     )}
-                    {/* {userType === 'qa' && (
+                    {userType === 'qa' && (
                       <Menu.Item>
                         {({ active }) => (
                           <button
@@ -136,7 +138,7 @@ const ProjectDetail = () => {
                           </button>
                         )}
                       </Menu.Item>
-                    )} */}
+                    )}
                   </Menu.Items>
                 </Transition>
               </Menu>
@@ -147,7 +149,7 @@ const ProjectDetail = () => {
               projectId={project.id}
               userType={userType}
             />
-            {/* <ProjectTickets project_id={project.id} /> */}
+            <ProjectTickets projectId={project.id} />
           </div>
 
           <ProjectForm
@@ -158,13 +160,13 @@ const ProjectDetail = () => {
             formType={formType}
             user_id={userId}
           />
-          {/* <TicketForm
+          <TicketForm
             isOpen={isOpenTicket}
             setIsOpen={() => setIsOpenTicket(false)}
-            project_id={project.id}
-            creator_id={userId}
+            projectId={project.id}
+            creatorId={userId}
             formType="create"
-          /> */}
+          />
         </>
       ) : (
         <p>Loading...</p>

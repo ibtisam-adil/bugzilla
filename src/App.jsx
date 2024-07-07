@@ -3,8 +3,8 @@ import {
   BrowserRouter as Router, Routes, Route,
   Navigate,
 } from 'react-router-dom';
-// import { ToastContainer } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { currentUser, selectAuth } from './redux/auth/AuthSlice';
@@ -13,6 +13,8 @@ import SignUp from './components/signPage/SignUp';
 import Layout from './components/Layout/Layout';
 import Projects from './components/Projects/Projects';
 import ProjectDetail from './components/Projects/ProjectDetail';
+import TicketsPage from './components/Tickets/TicketsPage';
+import Ticket from './components/Tickets/Ticket';
 
 const App = () => {
   const { isLogin } = useSelector(selectAuth);
@@ -32,13 +34,15 @@ const App = () => {
           <Route path="/*" element={isLogin ? <Layout /> : <Navigate to="/signin" />}>
             <Route index element={<Projects />} />
             <Route path="projects/:id" element={<ProjectDetail />} />
+            <Route path="tickets" element={<TicketsPage />} />
+            <Route path="tickets/:id" element={<Ticket />} />
           </Route>
           <Route path="/signin" element={isLogin ? <Navigate to="/" /> : <SignIn />} />
           <Route path="/signup" element={isLogin ? <Navigate to="/" /> : <SignUp />} />
           <Route path="*" element={<Navigate to={isLogin ? '/' : '/signin'} />} />
         </Routes>
       </Router>
-      {/* <ToastContainer /> */}
+      <ToastContainer />
     </div>
   );
 };

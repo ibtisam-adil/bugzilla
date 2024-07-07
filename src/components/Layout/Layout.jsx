@@ -4,7 +4,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 import bug1 from '../../../public/Assets/bug1.png';
 import dashboard from '../../../public/Assets/dashboard.png';
 import tickets from '../../../public/Assets/tickets.png';
@@ -47,9 +47,9 @@ const Layout = () => {
             </div>
             <div className="hover:bg-blue-500 hover:text-white rounded-xl flex items-center gap-6">
               <img alt="tickets" width={20} height={20} src={tickets} className="w-[20px]" />
-              <Link href="/" className="text-[rgb(58,54,54)] hover:text-white">
+              <NavLink to="/tickets" className="text-[rgb(58,54,54)] hover:text-white">
                 Tickets
-              </Link>
+              </NavLink>
             </div>
             <div className="w-full h-px bg-[silver]" />
             <div className="flex items-center gap-6">
