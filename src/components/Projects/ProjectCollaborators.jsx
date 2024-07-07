@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
+import { createSelector } from '@reduxjs/toolkit';
 import { removeUserFromProject } from '../../redux/projectTickets/ProjectTicketSlice';
 import NewCollaboratorForm from './NewCollaboratorForm';
 
@@ -8,14 +9,12 @@ const ProjectCollaborators = ({ projectId, userType }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
 
-  const data = useSelector(
-    (state) => state.projectTickets.projectTickets?.collaborators || [],
+  const selectCollaborators = createSelector(
+    (state) => state.projectTickets.projectTickets,
+    (projectTickets) => projectTickets?.collaborators || [],
   );
-  // console.log(data);
-
+  const data = useSelector(selectCollaborators);
   const collaborators = useMemo(() => data, [data]);
-  // console.log(collaborators);
-
   return (
     <>
       <div className="bg-[#F7F8FB] m-8 border border-blue-500 sm:max-h-[600px] overflow-auto collaborator-container">
@@ -44,15 +43,12 @@ const ProjectCollaborators = ({ projectId, userType }) => {
 
             <thead>
               <tr>
-                <th>Role</th>
                 <th>Name</th>
+                <th>Role</th>
                 <th>Remove</th>
               </tr>
             </thead>
             <tbody>
-              {/* {console.log(collaborators.user_type)}
-              {console.log(collaborators.id)}
-              {console.log(collaborators.name)} */}
               {collaborators.length > 0
               && collaborators.map(
                 (collaborator) => collaborator.user_type !== 'manager' && (
@@ -61,7 +57,7 @@ const ProjectCollaborators = ({ projectId, userType }) => {
                     <td style={{ width: '65%' }}>
                       {collaborator.user_type}
                     </td>
-                    {collaborator.user_type === 'manager' && (
+                    {userType === 'manager' && (
                       <td>
                         <button
                           type="button"
