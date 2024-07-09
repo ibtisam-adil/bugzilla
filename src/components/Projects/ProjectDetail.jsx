@@ -73,6 +73,7 @@ const ProjectDetail = () => {
             <h1>{project.name}</h1>
             <div>
               <Menu>
+                {(userType === 'manager' || userType === 'qa') && (
                 <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
                   Actions
                   <ChevronDownIcon
@@ -80,6 +81,7 @@ const ProjectDetail = () => {
                     aria-hidden="true"
                   />
                 </Menu.Button>
+                )}
                 <Transition
                   as={Fragment}
                   enter="transition ease-out duration-100"

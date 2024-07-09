@@ -10,7 +10,7 @@ import {
   fetchTicketById,
   markTicketAsCompleted,
 } from '../../redux/Tickets/TicketSlice';
-// import ScreenshotPopup from "./ScreenshotPopup";
+import ScreenshotPopup from './ScreenshotPopup';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -25,12 +25,10 @@ const Ticket = () => {
   };
 
   const [isOpenTicket, setIsOpenTicket] = useState(false);
-  // const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const { id: userId, user_type: userType } = useSelector((state) => state.auth.user) || {};
-  // console.log(userId, userType);
   const { isLogin } = useSelector((state) => state.auth) || {};
-  // console.log(isLogin);
 
   const { tickets } = useSelector((state) => state.Ticket);
   const ticket = tickets && tickets.length > 0 && tickets.find((ticket) => ticket.id === id);
@@ -45,12 +43,15 @@ const Ticket = () => {
     }
   }, [dispatch, id, ticket, isLogin]);
 
+  console.log(ticket.screenshot_url);
+
   return (
     <>
       <div className="h-30 bg-white mx-auto mt-4 p-8 w-[calc(100%-30px)] rounded-lg shadow-md border-blue-500 border flex justify-between items-center">
         <h1>{ticket.title}</h1>
         <div>
           <Menu>
+            {(userType === 'developer' || userType === 'qa') && (
             <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
               Actions
               <ChevronDownIcon
@@ -58,6 +59,7 @@ const Ticket = () => {
                 aria-hidden="true"
               />
             </Menu.Button>
+            )}
             <Transition
               as={Fragment}
               enter="transition ease-out duration-100"
@@ -198,18 +200,18 @@ const Ticket = () => {
           <strong>attachement</strong>
           <button
             type="button"
-            // onClick={() => setIsOpen(true)}
+            onClick={() => setIsOpen(true)}
             className="p-0 m-0 border-0 bg-transparent"
           >
             <img className="w-[100px] h-[50px] hover:scale-90 transition-scale duration-200" src={ticket.screenshot_url} alt="screenshot" />
           </button>
         </div>
       </div>
-      {/* <ScreenshotPopup
+      <ScreenshotPopup
         isOpen={isOpen}
         setIsOpen={() => setIsOpen(false)}
-        screenshot_url={ticket.screenshot_url}
-      /> */}
+        screenshotUrl={ticket.screenshot_url}
+      />
       <TicketForm
         isOpen={isOpenTicket}
         setIsOpen={() => setIsOpenTicket(false)}
