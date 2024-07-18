@@ -101,7 +101,7 @@ const TicketsPage = () => {
             </thead>
             <tbody>
               {error && (
-                <tr>
+                <tr key="error">
                   <td colSpan="4">{error}</td>
                 </tr>
               )}
@@ -148,7 +148,7 @@ const TicketsPage = () => {
                     </tr>
                   ))}
               {!error && !loading && tickets.length === 0 && (
-                <tr>
+                <tr key="no-tickets">
                   <td colSpan="4">There are no tickets.</td>
                 </tr>
               )}
