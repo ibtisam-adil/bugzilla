@@ -43,7 +43,9 @@ const Ticket = () => {
     }
   }, [dispatch, id, ticket, isLogin]);
 
-  console.log(ticket.screenshot_url);
+  if (!ticket) {
+    return <div>Ticket not found or has been deleted.</div>;
+  }
 
   return (
     <>

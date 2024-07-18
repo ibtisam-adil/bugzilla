@@ -10,7 +10,9 @@ const NewCollaboratorForm = ({ isOpen, setIsOpen, projectId }) => {
   const dispatch = useDispatch();
   const [role, setRole] = useState('developer');
 
-  const { developers, qas } = useSelector((state) => state.auth);
+  const {
+    developers, qas, token, error, loading,
+  } = useSelector((state) => state.auth);
 
   const initialValues = {
     id: '',
@@ -25,9 +27,25 @@ const NewCollaboratorForm = ({ isOpen, setIsOpen, projectId }) => {
   });
 
   useEffect(() => {
-    dispatch(fetchQas());
-    dispatch(fetchDevelopers());
-  }, [dispatch]);
+    if (token) {
+      dispatch(fetchDevelopers());
+      dispatch(fetchQas());
+    }
+  }, [dispatch, token]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return (
+      <div>
+        Error:
+        {' '}
+        {error}
+      </div>
+    );
+  }
 
   return (
     <Transition.Root show={isOpen} as={Fragment}>

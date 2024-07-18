@@ -6,14 +6,17 @@ import { useDispatch } from 'react-redux';
 import { createProjects, fetchProjects, updateProject } from '../../redux/projects/ProjectSlice';
 
 const ProjectForm = ({
-  isOpen, setIsOpen, project, formType, title,
+  isOpen,
+  setIsOpen,
+  project = {},
+  formType = 'create',
+  title,
 }) => {
   const dispatch = useDispatch();
 
   const initialValues = {
-    name: project ? project.name : '',
-    description: project ? project.description : '',
-    title: '',
+    name: project.name || '',
+    description: project.description || '',
   };
 
   const {
@@ -113,17 +116,12 @@ ProjectForm.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   setIsOpen: PropTypes.func.isRequired,
   project: PropTypes.shape({
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     name: PropTypes.string,
     description: PropTypes.string,
   }),
   formType: PropTypes.string,
   title: PropTypes.string.isRequired,
-};
-
-ProjectForm.defaultProps = {
-  project: {},
-  formType: 'create',
 };
 
 export default ProjectForm;

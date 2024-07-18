@@ -14,9 +14,9 @@ const AuthForm = ({
   welcomeMsg = '',
   welcomeDetail = '',
   formType = 'signin',
-  handleSubmit,
+  handleSubmit = () => {},
   setFieldValue,
-  userType,
+  userType = 'developer',
   handleFormSwitch,
 }) => {
   const dispatch = useDispatch();
@@ -133,15 +133,6 @@ AuthForm.propTypes = {
   setFieldValue: PropTypes.func.isRequired,
   userType: PropTypes.oneOf(['qa', 'developer']),
   handleFormSwitch: PropTypes.func.isRequired,
-};
-
-AuthForm.defaultProps = {
-  showCheckbox: false,
-  welcomeMsg: '',
-  welcomeDetail: '',
-  formType: 'signin',
-  handleSubmit: () => {},
-  userType: 'developer',
 };
 
 export default AuthForm;

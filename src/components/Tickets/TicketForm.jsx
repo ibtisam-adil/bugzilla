@@ -10,7 +10,14 @@ import { createTicket, fetchTickets, updateTicket } from '../../redux/Tickets/Ti
 import { fetchprojectTickets } from '../../redux/projectTickets/ProjectTicketSlice';
 
 const TicketForm = ({
-  isOpen, setIsOpen, formType, creatorId, projectId, ticket,
+  isOpen,
+  setIsOpen,
+  formType = '',
+  creatorId = null,
+  projectId = null,
+  ticket = {
+    id: null, title: '', description: '', deadline: '', bug_type: '',
+  },
 }) => {
   const dispatch = useDispatch();
 
@@ -18,10 +25,10 @@ const TicketForm = ({
     values, handleChange, handleSubmit, setFieldValue,
   } = useFormik({
     initialValues: {
-      deadline: ticket ? ticket.deadline : '',
-      bug_type: ticket ? ticket.bug_type : '',
-      title: ticket ? ticket.title : '',
-      description: ticket ? ticket.description : '',
+      deadline: ticket.deadline,
+      bug_type: ticket.bug_type,
+      title: ticket.title,
+      description: ticket.description,
       screenshot: null,
     },
     onSubmit: (values, actions) => {
@@ -42,7 +49,6 @@ const TicketForm = ({
       setIsOpen(false);
       actions.resetForm();
     },
-
   });
 
   const handleImageChange = (e) => {
@@ -182,7 +188,6 @@ const TicketForm = ({
 TicketForm.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   setIsOpen: PropTypes.func.isRequired,
-  title: PropTypes.string,
   formType: PropTypes.string,
   creatorId: PropTypes.number,
   projectId: PropTypes.number,
@@ -193,20 +198,6 @@ TicketForm.propTypes = {
     deadline: PropTypes.string,
     bug_type: PropTypes.string,
   }),
-};
-
-TicketForm.defaultProps = {
-  title: '',
-  formType: '',
-  creatorId: null,
-  projectId: null,
-  ticket: {
-    id: null,
-    title: '',
-    description: '',
-    deadline: '',
-    bug_type: '',
-  },
 };
 
 export default TicketForm;
